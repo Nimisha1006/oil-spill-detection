@@ -1,0 +1,17 @@
+# Data (never push)
+data/raw/
+data/processed/
+
+# Model weights
+*.pth
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Notebook cache
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
