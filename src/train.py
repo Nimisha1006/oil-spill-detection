@@ -13,7 +13,7 @@ from model import UNet
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
-print("Number of training samples:", len(train_dataset))
+
 
 
 # -----------------------------
