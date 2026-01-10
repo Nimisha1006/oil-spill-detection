@@ -34,7 +34,7 @@ train_loader = DataLoader(
 # -----------------------------
 # 3. MODEL INITIALIZATION
 # -----------------------------
-model = UNet(in_channels=4).to(device)
+model = UNet(in_channels=1).to(device)
 
 
 # -----------------------------
