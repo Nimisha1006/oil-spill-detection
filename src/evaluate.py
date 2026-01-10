@@ -19,7 +19,7 @@ val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False)
 # Load model
 model = UNet(in_channels=1).to(device)
 model.load_state_dict(
-    torch.load("models/unet_baseline.pth", map_location=torch.device("cpu"))
+    torch.load("/content/drive/MyDrive/oil-spill-detection/models/unet_baseline.pth", map_location=torch.device("cpu"))
 )
 
 model.eval()
