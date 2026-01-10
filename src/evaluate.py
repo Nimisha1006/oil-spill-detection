@@ -1,0 +1,46 @@
+import torch
+from torch.utils.data import DataLoader
+
+from dataset import OilSpillDataset
+from model import UNet
+from utils import dice_score, iou_score
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# Dataset (VALIDATION)
+val_dataset = OilSpillDataset(
+    image_dir="/content/drive/MyDrive/oil-spill-data/images/val",
+    mask_dir="/content/drive/MyDrive/oil-spill-data/masks/val",
+    augment=False
+)
+
+val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False)
+
+# Load model
+model = UNet(in_channels=1).to(device)
+model.load_state_dict(
+    torch.load("models/unet_baseline.pth", map_location=torch.device("cpu"))
+)
+
+model.eval()
+
+dice_total = 0
+iou_total = 0
+
+with torch.no_grad():
+    for images, masks in val_loader:
+        images = images.to(device)
+        masks = masks.to(device)
+
+        outputs = model(images)
+        preds = torch.sigmoid(outputs)
+        preds = (preds > 0.5).float()
+
+        dice_total += dice_score(preds, masks)
+        iou_total += iou_score(preds, masks)
+
+dice_avg = dice_total / len(val_loader)
+iou_avg = iou_total / len(val_loader)
+
+print(f"Average Dice Score: {dice_avg:.4f}")
+print(f"Average IoU Score : {iou_avg:.4f}")
