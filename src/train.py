@@ -20,8 +20,8 @@ print("Number of training samples:", len(train_dataset))
 # 2. DATASET & DATALOADER
 # -----------------------------
 train_dataset = OilSpillDataset(
-    image_dir="/content/drive/MyDrive/oil-spill-data/images/train",
-    mask_dir="/content/drive/MyDrive/oil-spill-data/masks/train",
+    image_dir="/content/data/images/train",
+    mask_dir="/content/data/masks/train",
     augment=True
 )
 train_loader = DataLoader(
