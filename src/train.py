@@ -76,7 +76,12 @@ for epoch in range(num_epochs):
 # -----------------------------
 # 6. SAVE MODEL
 # -----------------------------
-os.makedirs("results/models", exist_ok=True)
-torch.save(model.state_dict(), "results/models/unet_baseline.pth")
 
-print("Training completed and model saved.")
+SAVE_DIR = "/content/drive/MyDrive/oil-spill-detection/models"
+os.makedirs(SAVE_DIR, exist_ok=True)
+
+SAVE_PATH = os.path.join(SAVE_DIR, "unet_baseline.pth")
+
+torch.save(model.state_dict(), SAVE_PATH)
+print(f"Training completed and model saved at: {SAVE_PATH}")
+
