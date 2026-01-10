@@ -1,4 +1,6 @@
 #dataset loader -Whenever training code asks for an image, load it from disk and return a normalized (0–1) version
+from torch.utils.data import Dataset
+
 class OilSpillDataset(Dataset):
     def __init__(self, image_dir, mask_dir=None, augment=False):
         self.image_dir = image_dir
