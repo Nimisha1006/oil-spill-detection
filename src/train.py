@@ -18,8 +18,8 @@ print(f"Using device: {device}")
 # 2. DATASET & DATALOADER
 # -----------------------------
 train_dataset = OilSpillDataset(
-    image_dir="C:\\Users\\USER\\Desktop\\Oil-Spill-Detection\\data\\raw\\images\\train",
-    mask_dir="C:\\Users\\USER\\Desktop\\Oil-Spill-Detection\\data\\raw\\masks\\train",
+    image_dir="/content/drive/MyDrive/oil-spill-data/images",
+    mask_dir="/content/drive/MyDrive/oil-spill-data/masks",
     augment=True
 )
 train_loader = DataLoader(
