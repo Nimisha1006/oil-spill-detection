@@ -4,7 +4,8 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 
 from dataset import OilSpillDataset
-from model import AttentionUNet
+from attention_unet import AttentionUNet
+
 
 # ----------------------------
 # 1. DEVICE
