@@ -9,8 +9,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Dataset (VALIDATION)
 val_dataset = OilSpillDataset(
-    image_dir="/content/oil-spill-data/images/val",
-    mask_dir="/content/oil-spill-data/masks/val",
+    image_dir="/content/drive/MyDrive/oil-spill-data/images/val",
+    mask_dir="/content/drive/MyDrive/oil-spill-data/masks/val",
     augment=False
 )
 
