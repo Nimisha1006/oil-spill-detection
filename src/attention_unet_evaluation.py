@@ -26,8 +26,9 @@ model.load_state_dict(
 
 
 model.eval()
-dice_total = 0.0
-iou_total = 0.0
+
+dice_total = 0
+iou_total = 0
 
 with torch.no_grad():
     for images, masks in val_loader:
@@ -38,8 +39,8 @@ with torch.no_grad():
         preds = torch.sigmoid(outputs)
         preds = (preds > 0.5).float()
 
-        dice_total += dice_score(preds, masks).item()
-        iou_total += iou_score(preds, masks).item()
+        dice_total += dice_score(preds, masks)
+        iou_total += iou_score(preds, masks)
 
 dice_avg = dice_total / len(val_loader)
 iou_avg = iou_total / len(val_loader)
