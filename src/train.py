@@ -4,84 +4,69 @@ import torch.nn as nn
 from torch.utils.data import DataLoader
 
 from dataset import OilSpillDataset
-from model import UNet
+from model import AttentionUNet
 
-
-# -----------------------------
-# 1. DEVICE CONFIGURATION
-# -----------------------------
+# ----------------------------
+# 1. DEVICE
+# ----------------------------
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-print(f"Using device: {device}")
+print("Using device:", device)
 
-
-
-
-# -----------------------------
-# 2. DATASET & DATALOADER
-# -----------------------------
+# ----------------------------
+# 2. DATASET
+# ----------------------------
 train_dataset = OilSpillDataset(
-    image_dir="/content/data/images/train",
-    mask_dir="/content/data/masks/train",
+    image_dir="/content/drive/MyDrive/oil-spill-data/images/train",
+    mask_dir="/content/drive/MyDrive/oil-spill-data/masks/train",
     augment=True
 )
+
 train_loader = DataLoader(
     train_dataset,
     batch_size=4,
     shuffle=True,
-    num_workers=0
+    num_workers=2
 )
 
+# ----------------------------
+# 3. MODEL
+# ----------------------------
+model = AttentionUNet().to(device)
 
-
-# -----------------------------
-# 3. MODEL INITIALIZATION
-# -----------------------------
-model = UNet(in_channels=1).to(device)
-
-
-# -----------------------------
-# 4. LOSS FUNCTION & OPTIMIZER
-# -----------------------------
+# ----------------------------
+# 4. LOSS & OPTIMIZER
+# ----------------------------
 criterion = nn.BCEWithLogitsLoss()
 optimizer = torch.optim.Adam(model.parameters(), lr=1e-4)
 
-
-# -----------------------------
+# ----------------------------
 # 5. TRAINING LOOP
-# -----------------------------
-num_epochs = 5
+# ----------------------------
+epochs = 5
 
-for epoch in range(num_epochs):
+for epoch in range(epochs):
     model.train()
-    running_loss = 0.0
+    epoch_loss = 0.0
 
     for images, masks in train_loader:
         images = images.to(device)
         masks = masks.to(device)
 
         optimizer.zero_grad()
-
         outputs = model(images)
         loss = criterion(outputs, masks)
-
         loss.backward()
         optimizer.step()
 
-        running_loss += loss.item()
+        epoch_loss += loss.item()
 
-    epoch_loss = running_loss / len(train_loader)
-    print(f"Epoch [{epoch+1}/{num_epochs}] - Loss: {epoch_loss:.4f}")
+    print(f"Epoch [{epoch+1}/{epochs}] - Loss: {epoch_loss / len(train_loader):.4f}")
 
-
-# -----------------------------
+# ----------------------------
 # 6. SAVE MODEL
-# -----------------------------
+# ----------------------------
+os.makedirs("results/models", exist_ok=True)
+torch.save(model.state_dict(), "results/models/attention_unet.pth")
 
-SAVE_DIR = "/content/drive/MyDrive/oil-spill-detection/models"
-os.makedirs(SAVE_DIR, exist_ok=True)
-
-SAVE_PATH = os.path.join(SAVE_DIR, "unet_baseline.pth")
-
-torch.save(model.state_dict(), SAVE_PATH)
-print(f"Training completed and model saved at: {SAVE_PATH}")
+print("Training completed.")
 
