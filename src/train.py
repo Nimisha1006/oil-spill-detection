@@ -17,8 +17,8 @@ print("Using device:", device)
 # 2. DATASET
 # ----------------------------
 train_dataset = OilSpillDataset(
-    image_dir="/content/oil-spill-data/images/train",
-    mask_dir="/content/oil-spill-data/masks/train",
+    image_dir="/content/data/images/train",
+    mask_dir="/content/data/masks/train",
     augment=True
 )
 
