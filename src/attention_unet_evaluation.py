@@ -20,7 +20,7 @@ val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False)
 model = AttentionUNet().to(device)
 
 model.load_state_dict(
-    torch.load("/content/drive/MyDrive/oil-spill-detection/models/attention_unet.pth", map_location=device)
+    torch.load("/content/drive/MyDrive/oil-spill-detection/models/attention_unet_30.pth", map_location=device)
 
 )
 
