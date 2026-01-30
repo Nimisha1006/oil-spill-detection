@@ -10,8 +10,8 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 print("Using device:", device)
 
 train_dataset = OilSpillDataset(
-    image_dir="/content/data/images/train",
-    mask_dir="/content/data/masks/train",
+    image_dir="/content/drive/MyDrive/oil-spill-data/images/train",
+    mask_dir="/content/drive/MyDrive/oil-spill-data/masks/train",
     augment=True
 )
 
