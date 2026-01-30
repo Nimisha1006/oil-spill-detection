@@ -2,7 +2,7 @@ import torch
 from torch.utils.data import DataLoader
 
 from dataset import OilSpillDataset
-from model import UNet
+from Unet import UNet
 from utils import dice_score, iou_score
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
