@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-from model import UNet
+from Unet import UNet
 from dataset import OilSpillDataset
 
 # -----------------------------
@@ -17,7 +17,7 @@ print(f"Using device: {device}")
 # 2. LOAD MODEL
 # -----------------------------
 model = UNet(in_channels=1).to(device)
-model.load_state_dict(torch.load("models/unet_baseline.pth", map_location=device))
+model.load_state_dict(torch.load("models/unet_baseline.pth_30", map_location=device))
 model.eval()
 
 # -----------------------------
