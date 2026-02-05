@@ -134,6 +134,7 @@ class DeepLabV3Plus(nn.Module):
 # ----------------------------
 if __name__ == "__main__":
     model = DeepLabV3Plus()
+    model.eval()
     x = torch.randn(1, 1, 256, 256)
     y = model(x)
     print("Input :", x.shape)
