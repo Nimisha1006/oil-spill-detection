@@ -15,8 +15,8 @@ print("Using device:", device)
 # DATASET (VALIDATION)
 # ----------------------------
 val_dataset = OilSpillDataset(
-    image_dir="/content/data/images/val",
-    mask_dir="/content/data/masks/val",
+    image_dir="/content/oil-spill-data/images/train",
+    mask_dir="/content/oil-spill-data/masks/train",
     augment=False
 )
 
