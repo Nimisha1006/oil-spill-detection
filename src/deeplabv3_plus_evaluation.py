@@ -27,7 +27,7 @@ val_loader = DataLoader(val_dataset, batch_size=1, shuffle=False)
 # ----------------------------
 model = DeepLabV3Plus().to(device)
 model.load_state_dict(
-    torch.load("results/models/deeplabv3_plus.pth", map_location=device)
+    torch.load("/content/drive/MyDrive/oil-spill-detection/models/deeplabv3_plus.pth", map_location=device)
 )
 
 model.eval()
